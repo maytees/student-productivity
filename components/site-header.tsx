@@ -11,7 +11,6 @@ import {
 	BreadcrumbPage,
 	BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
@@ -45,7 +44,7 @@ export function SiteHeader() {
 
 				if (segments[2] === "create") {
 					breadcrumbs.push({
-						label: "Create Assignment",
+						label: "Create",
 						href: "/dashboard/assignments/create",
 						isLast: true,
 					});
@@ -56,8 +55,16 @@ export function SiteHeader() {
 				breadcrumbs.push({
 					label: "Forms",
 					href: "/dashboard/forms",
-					isLast: true,
+					isLast: segments[2] === undefined,
 				});
+
+				if (segments[2] === "create") {
+					breadcrumbs.push({
+						label: "Create",
+						href: "/dashboard/forms/create",
+						isLast: true,
+					});
+				}
 			}
 
 			if (segments[1] === "calendar") {
@@ -97,7 +104,7 @@ export function SiteHeader() {
 
 	return (
 		<header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
-			<div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
+			<div className="flex items-center w-full px-4 gap-1 lg:gap-2 lg:px-6">
 				<SidebarTrigger className="-ml-1" />
 				<Separator
 					orientation="vertical"

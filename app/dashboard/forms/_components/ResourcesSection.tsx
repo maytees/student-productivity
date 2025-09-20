@@ -39,7 +39,7 @@ const resources = [
 
 const ResourcesSection = () => {
 	return (
-		<div className="space-y-4 w-full">
+		<div className="w-full space-y-4">
 			<div>
 				<h2 className="text-lg font-semibold">Learning Resources</h2>
 				<p className="text-sm text-muted-foreground">
@@ -55,19 +55,19 @@ const ResourcesSection = () => {
 							href={resource.url}
 							target="_blank"
 							rel="noreferrer"
-							className="group flex items-center gap-3 p-4 border rounded-lg bg-card hover:bg-accent/50 transition-colors"
+							className="flex items-center p-4 border rounded-lg group gap-3 bg-card hover:bg-accent/50 transition-colors"
 						>
 							<div className="flex-shrink-0 mt-0.5">
 								<IconComponent className="size-5 text-primary group-hover:text-primary transition-colors" />
 							</div>
 							<div className="flex-1 min-w-0">
 								<div className="flex items-center gap-2">
-									<h3 className="font-semibold text-sm group-hover:text-primary transition-colors">
+									<h3 className="text-sm font-semibold group-hover:text-primary transition-colors">
 										{resource.title}
 									</h3>
 									<ExternalLink className="size-3 text-muted-foreground group-hover:text-primary transition-colors" />
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<p className="mt-1 text-xs text-muted-foreground">
 									{resource.description}
 								</p>
 							</div>

@@ -1,6 +1,6 @@
 "use server";
 
-import { requireUser } from "@/app/data/user/require-user";
+import { requireUser } from "@/app/data/require-user";
 import type { ApiResponse } from "@/lib/types";
 import { type ScheduleFormType, scheduleSchema } from "@/lib/zodSchemas";
 

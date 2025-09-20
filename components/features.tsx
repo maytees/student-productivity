@@ -104,11 +104,11 @@ export function Features() {
   ];
 
   return (
-    <section className="sm:py-24 pt-20 pb-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="pt-20 pb-20 sm:py-24">
+      <div className="px-6 mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-1">
-            <h2 className="text-3xl sm:text-4xl tracking-tight text-foreground  font-semibold font-lora">
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl text-foreground  font-lora">
               Key benefits for every team size
             </h2>
             <p className="mt-3 text-muted-foreground max-w-prose ">
@@ -142,7 +142,7 @@ export function Features() {
                   </li>
                 ))}
               </ul>
-              <div className="text-xs text-muted-foreground mt-auto">
+              <div className="mt-auto text-xs text-muted-foreground">
                 Built to remove the complexity barrier and cut time investment
                 by hours each week. Helping you focus on content creation, not
                 the hassle of uploading.
@@ -173,7 +173,7 @@ export function Features() {
                   </li>
                 ))}
               </ul>
-              <div className="text-xs text-muted-foreground mt-auto">
+              <div className="mt-auto text-xs text-muted-foreground">
                 Ideal for social media marketing agencies who want to simplify
                 their workflow and focus on content creation for their clients.
               </div>
@@ -185,7 +185,7 @@ export function Features() {
         <div className="mt-20">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-1">
-              <h2 className="text-3xl sm:text-4xl tracking-tight text-foreground font-semibold font-lora">
+              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl text-foreground font-lora">
                 What creators struggle with
               </h2>
               <p className="mt-3 text-muted-foreground max-w-prose">
@@ -196,7 +196,7 @@ export function Features() {
 
             <div className="lg:col-span-2">
               <Tabs defaultValue={painPoints[0].value} className="w-full">
-                <TabsList className="grid w-full grid-cols-4 h-auto p-1">
+                <TabsList className="w-full h-auto p-1 grid grid-cols-4">
                   {painPoints.map((point) => (
                     <TabsTrigger
                       key={point.value}
@@ -214,14 +214,14 @@ export function Features() {
                     value={point.value}
                     className="mt-0"
                   >
-                    <Card className="p-6 border-primary/20 rounded-t-none border-t-0">
+                    <Card className="p-6 border-t-0 rounded-t-none border-primary/20">
                       <div className="flex items-center gap-3">
                         <point.icon className="w-5 h-5 text-primary" />
                         <h4 className="text-lg font-medium text-primary font-lora">
                           {point.title}
                         </h4>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                      <p className="text-sm leading-relaxed text-muted-foreground">
                         {point.description}
                       </p>
                     </Card>

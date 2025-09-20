@@ -270,7 +270,7 @@ const SchedulePage = () => {
 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-					<div className="flex flex-col lg:flex-row-reverse gap-4 justify-between">
+					<div className="flex flex-col justify-between lg:flex-row-reverse gap-4">
 						<Card className="w-full lg:w-1/3 h-fit">
 							<CardHeader>
 								<CardTitle className="flex items-center gap-2">
@@ -369,7 +369,7 @@ const SchedulePage = () => {
 									control={form.control}
 									name="postNow"
 									render={({ field }) => (
-										<FormItem className="w-full flex items-center justify-between gap-2">
+										<FormItem className="flex items-center justify-between w-full gap-2">
 											<FormLabel>Post Now</FormLabel>
 											<SlimSwitch
 												checked={field.value}
@@ -402,7 +402,7 @@ const SchedulePage = () => {
 																	) : (
 																		<span>Pick a date</span>
 																	)}
-																	<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+																	<CalendarIcon className="w-4 h-4 ml-auto opacity-50" />
 																</Button>
 															</FormControl>
 														</PopoverTrigger>
@@ -453,7 +453,7 @@ const SchedulePage = () => {
 									</div>
 								)}
 							</CardContent>
-							<CardFooter className="pt-3 flex items-start flex-col gap-2">
+							<CardFooter className="flex flex-col items-start pt-3 gap-2">
 								<Button type="submit" className="w-full" disabled={pending}>
 									{postNow ? <Zap /> : <CalendarIcon />}
 									{postNow ? "Post Now" : "Schedule"}
@@ -461,7 +461,7 @@ const SchedulePage = () => {
 							</CardFooter>
 						</Card>
 
-						<div className="space-y-4 w-full">
+						<div className="w-full space-y-4">
 							{/* Post information */}
 							<Card>
 								<CardHeader className="py-5">
@@ -474,7 +474,7 @@ const SchedulePage = () => {
 							</Card>
 
 							{/* Platforms & Accounts */}
-							<Card className=" w-full">
+							<Card className="w-full ">
 								<CardHeader className="py-5">
 									<CardTitle>Platforms & Accounts</CardTitle>
 									<CardDescription>
@@ -555,7 +555,7 @@ const SchedulePage = () => {
 										</div>
 									</FormItem>
 
-									<Button variant="outline" asChild className="mt-4 w-full">
+									<Button variant="outline" asChild className="w-full mt-4">
 										<Link href="/dashboard/connect">
 											<Plus />
 											Connect More Accounts
@@ -584,7 +584,7 @@ const SchedulePage = () => {
 												name={accountFieldName}
 												render={() => (
 													<FormItem className="mt-10">
-														<FormLabel className="mb-2 flex items-center gap-2">
+														<FormLabel className="flex items-center mb-2 gap-2">
 															{platformData?.icon}
 															{platform.charAt(0).toUpperCase() +
 																platform.slice(1)}{" "}

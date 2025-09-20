@@ -28,14 +28,14 @@ type RangeCalendarProps = ComponentProps<typeof RangeCalendarRac> &
 
 function CalendarHeader() {
   return (
-    <header className="flex w-full items-center gap-1 pb-1">
+    <header className="flex items-center w-full pb-1 gap-1">
       <Button
         slot="previous"
         className="text-muted-foreground/80 hover:bg-accent hover:text-foreground focus-visible:ring-ring/50 flex size-9 items-center justify-center rounded-md transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
       >
         <ChevronLeftIcon size={16} />
       </Button>
-      <HeadingRac className="grow text-center text-sm font-medium" />
+      <HeadingRac className="text-sm font-medium text-center grow" />
       <Button
         slot="next"
         className="text-muted-foreground/80 hover:bg-accent hover:text-foreground focus-visible:ring-ring/50 flex size-9 items-center justify-center rounded-md transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
@@ -53,7 +53,7 @@ function CalendarGridComponent({ isRange = false }: { isRange?: boolean }) {
     <CalendarGridRac>
       <CalendarGridHeaderRac>
         {(day) => (
-          <CalendarHeaderCellRac className="text-muted-foreground/80 size-9 rounded-md p-0 text-xs font-medium">
+          <CalendarHeaderCellRac className="p-0 text-xs font-medium text-muted-foreground/80 size-9 rounded-md">
             {day}
           </CalendarHeaderCellRac>
         )}

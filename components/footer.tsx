@@ -8,9 +8,9 @@ export function Footer() {
 
 	return (
 		<footer className="py-10 border-t border-border">
-			<div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+			<div className="flex flex-col items-center justify-between px-6 mx-auto max-w-7xl sm:flex-row gap-4">
 				<div className="flex items-center gap-3">
-					<div className="h-8 w-8 rounded-md border border-border grid place-items-center bg-card">
+					<div className="w-8 h-8 border rounded-md border-border grid place-items-center bg-card">
 						<span className="text-xl font-semibold tracking-tight ">
 							<Asterisk className="w-4 h-4" />
 						</span>
@@ -23,7 +23,7 @@ export function Footer() {
 					</div>
 				</div>
 
-				<div className="flex items-center gap-6 text-sm ">
+				<div className="flex items-center text-sm gap-6 ">
 					<Link
 						href="#"
 						className="text-muted-foreground hover:text-primary transition-colors"

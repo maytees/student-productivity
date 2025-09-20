@@ -9,9 +9,9 @@ import { Mail, MessageSquare, Send } from "lucide-react";
 export function Contact() {
   return (
     <section id="contact" className="py-20 sm:py-24 bg-muted/30">
-      <div className="max-w-5xl mx-auto px-6 grid lg:grid-cols-2 gap-10">
+      <div className="max-w-5xl px-6 mx-auto grid lg:grid-cols-2 gap-10">
         <div>
-          <h2 className="text-3xl tracking-tight text-foreground  font-semibold font-lora">
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground  font-lora">
             Talk to us
           </h2>
           <p className="mt-3 text-muted-foreground ">
@@ -20,11 +20,11 @@ export function Contact() {
           </p>
 
           <div className="mt-6 space-y-3">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground ">
+            <div className="flex items-center text-sm gap-2 text-muted-foreground ">
               <Mail className="w-4 h-4 text-primary" />
               hello@px.app
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground ">
+            <div className="flex items-center text-sm gap-2 text-muted-foreground ">
               <MessageSquare className="w-4 h-4 text-primary" />
               Live chat (9–5)
             </div>

@@ -34,7 +34,7 @@ export default function LabelSelect({
     }
 
     const renderIcon = () => {
-        if (!icon) return <FileWarning className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />
+        if (!icon) return <FileWarning className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8" />
 
         if (typeof icon === 'string') {
             return (
@@ -43,12 +43,12 @@ export default function LabelSelect({
                     alt={`${label} icon`}
                     width={24}
                     height={24}
-                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover flex-shrink-0"
+                    className="flex-shrink-0 object-cover w-6 h-6 rounded-full sm:w-8 sm:h-8"
                 />
             )
         }
 
-        return <div className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0 flex items-center justify-center">{icon}</div>
+        return <div className="flex items-center justify-center flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8">{icon}</div>
     }
 
     return (
@@ -61,10 +61,10 @@ export default function LabelSelect({
                 onCheckedChange={handleChange}
                 disabled={disabled}
             />
-            <div className="flex flex-1 min-w-0 items-start sm:items-center gap-2 sm:gap-3">
+            <div className="flex items-start flex-1 min-w-0 sm:items-center gap-2 sm:gap-3">
                 {renderIcon()}
-                <div className="grid gap-1 sm:gap-2 min-w-0 flex-1">
-                    <Label htmlFor={id} className="text-sm max-w-3xs sm:text-base truncate leading-tight">
+                <div className="flex-1 min-w-0 grid gap-1 sm:gap-2">
+                    <Label htmlFor={id} className="text-sm leading-tight truncate max-w-3xs sm:text-base">
                         <span className="break-words truncate">{label}</span>{" "}
                         {sublabel && (
                             <span className="text-muted-foreground text-xs leading-[inherit] font-normal block sm:inline">
@@ -73,7 +73,7 @@ export default function LabelSelect({
                         )}
                     </Label>
                     {description && (
-                        <p id={`${id}-description`} className="text-muted-foreground text-xs sm:text-sm leading-tight break-words">
+                        <p id={`${id}-description`} className="text-xs leading-tight break-words text-muted-foreground sm:text-sm">
                             {description}
                         </p>
                     )}

@@ -44,9 +44,9 @@ export function FAQ() {
 
   return (
     <section id={useId()} className="py-20 sm:py-24">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl px-6 mx-auto">
         <div className="text-center">
-          <h2 className="text-3xl tracking-tight text-foreground  font-semibold font-lora">
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground  font-lora">
             Frequently asked questions
           </h2>
           <p className="mt-3 text-muted-foreground ">
@@ -54,7 +54,7 @@ export function FAQ() {
           </p>
         </div>
 
-        <div className="mt-10 py-3 ">
+        <div className="py-3 mt-10 ">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
               <AccordionItem
@@ -63,10 +63,10 @@ export function FAQ() {
                 value={`item-${index}`}
                 className="border border-border rounded-lg bg-card px-4 data-[state=open]:bg-card"
               >
-                <AccordionTrigger className="text-sm text-foreground  hover:no-underline py-4">
+                <AccordionTrigger className="py-4 text-sm text-foreground  hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm text-muted-foreground  pb-4">
+                <AccordionContent className="pb-4 text-sm text-muted-foreground ">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

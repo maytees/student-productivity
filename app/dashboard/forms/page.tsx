@@ -1,16 +1,20 @@
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
+import { getUsersForms } from "@/app/data/business/user/get-forms";
 import { Button } from "@/components/ui/button";
 import FormsList from "./_components/FormsList";
 import QuickTemplatesSection from "./_components/QuickTemplatesSection";
 import ResourcesSection from "./_components/ResourcesSection";
 
-const FormsPage = () => {
+const FormsPage = async () => {
+	const forms = await getUsersForms();
+
 	return (
-		<>
-			<div className="flex flex-row items-center justify-between">
+		<div className="px-5 py-4 gap-4 md:gap-6 md:py-6">
+			<div className="flex flex-row items-center justify-between mb-4 gap-1">
 				<div className="flex flex-col">
-					<h1 className="text-2xl font-bold">Forms (0)</h1>
+					<h1 className="text-2xl font-bold">Forms ({forms.length})</h1>
 					<p className="text-sm text-muted-foreground">
 						Manage your evaluation forms here.
 					</p>
@@ -25,10 +29,12 @@ const FormsPage = () => {
 				</div>
 			</div>
 
-			<FormsList />
+			<Suspense fallback="Loading...">
+				<FormsList forms={forms} />
+			</Suspense>
 			<QuickTemplatesSection />
 			<ResourcesSection />
-		</>
+		</div>
 	);
 };
 

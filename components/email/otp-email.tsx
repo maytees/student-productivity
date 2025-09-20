@@ -81,8 +81,8 @@ export default function OtpEmail({
 				}}
 			>
 				<Body className="font-sans bg-gray-50">
-					<Container className="mx-auto px-4 py-8">
-						<Section className="mx-auto max-w-md bg-white rounded-lg border border-gray-200 p-8 text-left">
+					<Container className="px-4 py-8 mx-auto">
+						<Section className="max-w-md p-8 mx-auto text-left bg-white border border-gray-200 rounded-lg">
 							<Section className="flex justify-start mb-6">
 								<Img
 									src={`https://molnr.t3.storage.dev/molnr-logo.png`}
@@ -93,23 +93,23 @@ export default function OtpEmail({
 							</Section>
 
 							<Section className="mb-4">
-								<Text className="text-xl font-bold text-gray-900 m-0">
+								<Text className="m-0 text-xl font-bold text-gray-900">
 									Flicker
 								</Text>
-								<Text className="text-sm text-gray-600 m-0 mt-1">
+								<Text className="m-0 mt-1 text-sm text-gray-600">
 									Your verification code
 								</Text>
 							</Section>
 
 							<Section className="mb-6">
-								<Text className="text-base text-gray-700 mb-4">
+								<Text className="mb-4 text-base text-gray-700">
 									Here&apos;s your verification code for {email}. Enter this
 									code to complete your sign-in:
 								</Text>
 							</Section>
 
 							<Section className="mb-6">
-								<CodeInline className="bg-gray-100 text-2xl font-mono font-bold px-4 py-2 rounded-md text-gray-900 tracking-wider">
+								<CodeInline className="px-4 py-2 font-mono text-2xl font-bold tracking-wider text-gray-900 bg-gray-100 rounded-md">
 									{otp}
 								</CodeInline>
 							</Section>
@@ -122,10 +122,10 @@ export default function OtpEmail({
 							</Section>
 						</Section>
 
-						<Hr className="mb-6 mt-8 border-gray-200" />
+						<Hr className="mt-8 mb-6 border-gray-200" />
 
-						<Section className="mb-4 text-left text-sm text-gray-500">
-							<Text className="m-0 p-0">
+						<Section className="mb-4 text-sm text-left text-gray-500">
+							<Text className="p-0 m-0">
 								© 2025 Molnr. All rights reserved.
 							</Text>
 						</Section>

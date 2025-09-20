@@ -53,7 +53,7 @@ const quickTemplates: TemplateCardType[] = [
 const QuickTemplatesSection = () => {
 	return (
 		<>
-			<div className="flex flex-row justify-between items-center">
+			<div className="flex flex-row items-center justify-between">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-xl font-bold">Form Templates</h2>
 					<p className="text-sm text-muted-foreground">
@@ -71,27 +71,27 @@ const QuickTemplatesSection = () => {
 						<div key={template.link} className="w-72 min-h-fit">
 							<div
 								key={template.name}
-								className="group relative mb-5 flex-none w-72 p-4 border rounded-lg bg-card hover:bg-accent/50 transition-colors cursor-pointer"
+								className="relative flex-none p-4 mb-5 border rounded-lg cursor-pointer group w-72 bg-card hover:bg-accent/50 transition-colors"
 							>
 								<div className="space-y-3">
-									<div className="w-full h-32 bg-gradient-to-br from-primary/10 to-primary/5 rounded-md flex items-center justify-center overflow-hidden">
+									<div className="flex items-center justify-center w-full h-32 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 rounded-md">
 										{template.image ? (
 											<Image
 												src={template.image}
 												alt={template.name}
 												width={288}
 												height={128}
-												className="w-full h-full object-cover"
+												className="object-cover w-full h-full"
 											/>
 										) : (
 											<FileText className="size-8 text-primary/60" />
 										)}
 									</div>
 									<div className="space-y-1">
-										<h3 className="font-medium text-sm group-hover:text-primary transition-colors">
+										<h3 className="text-sm font-medium group-hover:text-primary transition-colors">
 											{template.name}
 										</h3>
-										<p className="text-xs max-w-full text-muted-foreground text-wrap">
+										<p className="max-w-full text-xs text-muted-foreground text-wrap">
 											{template.description}
 										</p>
 									</div>

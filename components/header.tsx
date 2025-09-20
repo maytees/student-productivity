@@ -12,9 +12,9 @@ export function Header() {
 
 	return (
 		<header className="w-full border-b border-border/70 bg-background/80 backdrop-blur">
-			<div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+			<div className="flex items-center justify-between px-6 py-4 mx-auto max-w-7xl">
 				<div className="flex items-center gap-3">
-					<div className="h-8 w-8 rounded-md border border-border grid place-items-center bg-card">
+					<div className="w-8 h-8 border rounded-md border-border grid place-items-center bg-card">
 						<span className="text-xl font-semibold tracking-tight ">
 							<Asterisk className="w-4 h-4" />
 						</span>
@@ -27,7 +27,7 @@ export function Header() {
 					</div>
 				</div>
 
-				<nav className="hidden md:flex items-center gap-6 ">
+				<nav className="items-center hidden md:flex gap-6 ">
 					<Link
 						href="#features"
 						className="text-sm text-foreground/70 hover:text-primary transition-colors"
@@ -57,7 +57,7 @@ export function Header() {
 				<div className="flex items-center gap-3">
 					<ModeToggle />
 					{isPending ? (
-						<Skeleton className="h-8 w-8 rounded-full" />
+						<Skeleton className="w-8 h-8 rounded-full" />
 					) : session ? (
 						<Button asChild variant={"primary"} size="sm">
 							<Link href="/dashboard">Dashboard</Link>

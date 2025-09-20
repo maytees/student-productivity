@@ -401,16 +401,16 @@ export default function SortableImageUpload({
                   src={item.src}
                   width={120}
                   height={120}
-                  className="w-full h-full object-cover rounded-md pointer-events-none"
+                  className="object-cover w-full h-full pointer-events-none rounded-md"
                   alt={item.alt}
                 />
 
                 {/* Drag Handle */}
-                <SortableItemHandle className="absolute top-2 start-2 opacity-0 group-hover:opacity-100 cursor-grab active:cursor-grabbing">
+                <SortableItemHandle className="absolute opacity-0 top-2 start-2 group-hover:opacity-100 cursor-grab active:cursor-grabbing">
                   <Button
                     variant="outline"
                     size="icon"
-                    className="size-6 rounded-full"
+                    className="rounded-full size-6"
                   >
                     <GripVertical className="size-3.5" />
                   </Button>
@@ -421,7 +421,7 @@ export default function SortableImageUpload({
                   onClick={() => removeImage(item.id)}
                   variant="outline"
                   size="icon"
-                  className="shadow-sm absolute top-2 end-2 size-6 opacity-0 group-hover:opacity-100 rounded-full"
+                  className="absolute rounded-full opacity-0 shadow-sm top-2 end-2 size-6 group-hover:opacity-100"
                 >
                   <XIcon className="size-3.5" />
                 </Button>
@@ -451,7 +451,7 @@ export default function SortableImageUpload({
           <h3 className="text-2sm text-foreground font-semibold mb-0.5">
             Choose a file or drag & drop here.
           </h3>
-          <span className="text-xs text-secondary-foreground font-normal block mb-3">
+          <span className="block mb-3 text-xs font-normal text-secondary-foreground">
             JPEG, PNG, up to {formatBytes(maxSize)}.
           </span>
           <Button size="sm" type="button" variant="mono" onClick={openFileDialog}>
@@ -465,17 +465,17 @@ export default function SortableImageUpload({
         <div className="mt-6 space-y-3">
           {images.map((imageFile) => (
             <Card key={imageFile.id} className="shadow-none rounded-md">
-              <CardContent className="flex items-center gap-2 p-3">
+              <CardContent className="flex items-center p-3 gap-2">
                 <div className="flex items-center justify-center size-[32px] rounded-md border border-border shrink-0">
                   <ImageIcon className="size-4 text-muted-foreground" />
                 </div>
                 <div className="flex flex-col gap-1.5 w-full">
                   <div className="flex items-center justify-between gap-2.5 -mt-2 w-full">
                     <div className="flex items-center gap-2.5">
-                      <span className="text-xs text-foreground font-medium leading-none">
+                      <span className="text-xs font-medium leading-none text-foreground">
                         {imageFile.file.name}
                       </span>
-                      <span className="text-xs text-muted-foreground font-normal leading-none">
+                      <span className="text-xs font-normal leading-none text-muted-foreground">
                         {formatBytes(imageFile.file.size)}
                       </span>
                       {imageFile.status === "uploading" && (

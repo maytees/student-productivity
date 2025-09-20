@@ -75,9 +75,9 @@ export function Pricing() {
 
   return (
     <section id={"pricing"} className="py-20 sm:py-24 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl tracking-tight text-foreground  font-semibold font-lora">
+      <div className="px-6 mx-auto max-w-7xl">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl text-foreground  font-lora">
             Simple pricing for real work
           </h2>
           <p className="mt-3 text-muted-foreground ">
@@ -108,7 +108,7 @@ export function Pricing() {
               </h3>
 
               <div className="mt-4">
-                <div className="text-3xl tracking-tight text-foreground  font-semibold font-lora">
+                <div className="text-3xl font-semibold tracking-tight text-foreground  font-lora">
                   {plan.price}
                 </div>
                 <div className="text-sm text-muted-foreground ">
@@ -116,9 +116,9 @@ export function Pricing() {
                 </div>
               </div>
 
-              <ul className="space-y-3 text-sm text-muted-foreground mt-6 flex-1">
+              <ul className="flex-1 mt-6 text-sm space-y-3 text-muted-foreground">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex gap-3 items-start">
+                  <li key={feature} className="flex items-start gap-3">
                     <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                     <span className="leading-relaxed">{feature}</span>
                   </li>
@@ -132,7 +132,7 @@ export function Pricing() {
           ))}
         </div>
 
-        <p className="mt-6 text-center text-xs text-muted-foreground ">
+        <p className="mt-6 text-xs text-center text-muted-foreground ">
           Monthly plans are billed monthly. Cancel anytime. No credit card
           required for Free. 7-day money-back guarantee on all paid plans.
         </p>

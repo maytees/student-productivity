@@ -16,7 +16,7 @@ export default function ScheduleInfoTabs({ form }: { form: UseFormReturn<Schedul
         <Tabs defaultValue="text" value={form.watch("postType")} onValueChange={(value) => {
             form.setValue("postType", value as "text" | "video" | "image")
         }} className="">
-            <TabsList className="h-auto rounded-none border-b bg-transparent p-0 w-full grid grid-cols-3">
+            <TabsList className="w-full h-auto p-0 bg-transparent border-b rounded-none grid grid-cols-3">
                 <TabsTrigger
                     value="text"
                     className="data-[state=active]:after:bg-primary relative rounded-none py-2 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
@@ -41,7 +41,7 @@ export default function ScheduleInfoTabs({ form }: { form: UseFormReturn<Schedul
                 </TabsTrigger>
             </TabsList>
             <TabsContent value="video">
-                <p className="text-muted-foreground p-4 text-center text-xs">
+                <p className="p-4 text-xs text-center text-muted-foreground">
                     Content for Video
                 </p>
             </TabsContent>

@@ -28,7 +28,7 @@ export function Hero() {
 					/>
 				</div>
 
-				<div className="grid grid-cols-1 mt-20 lg:grid-cols-2 gap-12 max-w-7xl mx-auto px-6 items-center">
+				<div className="items-center px-6 mx-auto mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl">
 					{/* Left: Text */}
 					<div className="pt-12 lg:pt-0">
 						<h1 className="text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.1] text-foreground">
@@ -52,13 +52,13 @@ export function Hero() {
               ))} */}
 						</h1>
 
-						<p className="mt-5 text-base sm:text-lg text-muted-foreground max-w-2xl  animate-blur-in">
+						<p className="max-w-2xl mt-5 text-base sm:text-lg text-muted-foreground  animate-blur-in">
 							Ultra simplified cross platform posting for creators and small
 							marketing agencies, all without the complexity of enterprise
 							tools. Focus on content creation, not uploading.
 						</p>
 
-						<div className="mt-8 flex flex-col sm:flex-row gap-3">
+						<div className="flex flex-col mt-8 sm:flex-row gap-3">
 							<Button asChild size="lg" className="">
 								<Link
 									href="#pricing"
@@ -79,7 +79,7 @@ export function Hero() {
 							</Button>
 						</div>
 
-						<div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl">
+						<div className="max-w-2xl mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
 							{[
 								{ icon: Clock, text: "No Hassle" },
 								{ icon: BadgeCheck, text: "Very Simple" },
@@ -88,7 +88,7 @@ export function Hero() {
 							].map((item, index) => (
 								<div
 									key={item.text}
-									className="flex items-center gap-2 text-sm text-muted-foreground border border-border rounded-md px-3 py-2 bg-card/80"
+									className="flex items-center px-3 py-2 text-sm border gap-2 text-muted-foreground border-border rounded-md bg-card/80"
 									style={{ animationDelay: `${860 + index * 60}ms` }}
 								>
 									<item.icon className="w-4 h-4 text-primary" />
@@ -109,10 +109,10 @@ export function Hero() {
 									</h3>
 								</div>
 								<div className="flex items-center gap-2">
-									<div className="h-6 px-2 rounded-md text-xs grid place-items-center bg-muted text-muted-foreground ">
+									<div className="h-6 px-2 text-xs rounded-md grid place-items-center bg-muted text-muted-foreground ">
 										Week
 									</div>
-									<div className="h-6 px-2 rounded-md text-xs grid place-items-center border border-border ">
+									<div className="h-6 px-2 text-xs border rounded-md grid place-items-center border-border ">
 										Month
 									</div>
 								</div>
@@ -133,15 +133,15 @@ export function Hero() {
 							</div>
 
 							{/* Divider */}
-							<div className="my-6 h-px bg-border" />
+							<div className="h-px my-6 bg-border" />
 						</Card>
 
 						{/* Floating trust badge */}
-						<div className="hidden sm:flex absolute -bottom-6 -left-2 items-center gap-3 border border-border rounded-lg bg-card px-3 py-2 animate-fade-in">
+						<div className="absolute items-center hidden px-3 py-2 border rounded-lg sm:flex -bottom-6 -left-2 gap-3 border-border bg-card animate-fade-in">
 							<Image
 								src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=200&auto=format&fit=crop"
 								alt="User"
-								className="h-7 w-7 rounded-full object-cover"
+								className="object-cover rounded-full h-7 w-7"
 								width={28}
 								height={28}
 							/>
@@ -155,13 +155,13 @@ export function Hero() {
 					</div>
 				</div>
 				{/* Reddit quote */}
-				<div className="text-center mt-20">
-					<p className="text-base text-muted-foreground italic max-w-2xl mx-auto px-6">
+				<div className="mt-20 text-center">
+					<p className="max-w-2xl px-6 mx-auto text-base italic text-muted-foreground">
 						&quot;I&apos;m finding that I&apos;m spending almost half my workday
 						just reformatting and uploading the same content to different
 						platforms&quot;
 					</p>
-					<p className="text-sm text-muted-foreground/70 mt-2">
+					<p className="mt-2 text-sm text-muted-foreground/70">
 						- Content Creator
 					</p>
 				</div>
