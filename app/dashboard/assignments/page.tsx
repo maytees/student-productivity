@@ -37,8 +37,11 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import SlimSwitch from "@/components/ui/slim-switch";
+import {
+	type ScheduleFormType,
+	scheduleSchema,
+} from "@/lib/schemas/zodSchemas";
 import { cn } from "@/lib/utils";
-import { type ScheduleFormType, scheduleSchema } from "@/lib/zodSchemas";
 import ScheduleInfoTabs from "../_components/ScheduleInfoTabs";
 
 const platforms = [

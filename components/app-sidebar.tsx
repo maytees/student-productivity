@@ -113,7 +113,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						<SidebarMenuButton
 							asChild
 							className="data-[slot=sidebar-menu-button]:!p-1.5 "
-							variant={"primary"}
 						>
 							<Link href="/">
 								<Asterisk className="!size-5" />

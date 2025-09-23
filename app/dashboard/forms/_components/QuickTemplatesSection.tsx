@@ -53,7 +53,7 @@ const quickTemplates: TemplateCardType[] = [
 const QuickTemplatesSection = () => {
 	return (
 		<>
-			<div className="flex flex-row items-center justify-between">
+			<div className="flex flex-row items-center justify-between mb-2">
 				<div className="flex flex-col gap-1">
 					<h2 className="text-xl font-bold">Form Templates</h2>
 					<p className="text-sm text-muted-foreground">
@@ -65,16 +65,16 @@ const QuickTemplatesSection = () => {
 					<Link href="/dashboard/forms/templates?all">View All</Link>
 				</Button>
 			</div>
-			<ScrollArea className="w-full rounded-md  whitespace-nowrap">
-				<div className="flex w-max space-x-4">
+			<ScrollArea className="w-full rounded-md whitespace-nowrap">
+				<div className="flex space-x-4 w-max">
 					{quickTemplates.map((template) => (
 						<div key={template.link} className="w-72 min-h-fit">
 							<div
 								key={template.name}
-								className="relative flex-none p-4 mb-5 border rounded-lg cursor-pointer group w-72 bg-card hover:bg-accent/50 transition-colors"
+								className="relative flex-none p-4 mb-5 transition-colors border rounded-lg cursor-pointer group w-72 bg-card hover:bg-accent/50"
 							>
 								<div className="space-y-3">
-									<div className="flex items-center justify-center w-full h-32 overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 rounded-md">
+									<div className="flex items-center justify-center w-full h-32 overflow-hidden rounded-md bg-gradient-to-br from-primary/10 to-primary/5">
 										{template.image ? (
 											<Image
 												src={template.image}
@@ -88,7 +88,7 @@ const QuickTemplatesSection = () => {
 										)}
 									</div>
 									<div className="space-y-1">
-										<h3 className="text-sm font-medium group-hover:text-primary transition-colors">
+										<h3 className="text-sm font-medium transition-colors group-hover:text-primary">
 											{template.name}
 										</h3>
 										<p className="max-w-full text-xs text-muted-foreground text-wrap">

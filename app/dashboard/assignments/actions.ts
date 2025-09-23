@@ -1,8 +1,11 @@
 "use server";
 
 import { requireUser } from "@/app/data/require-user";
+import {
+	type ScheduleFormType,
+	scheduleSchema,
+} from "@/lib/schemas/zodSchemas";
 import type { ApiResponse } from "@/lib/types";
-import { type ScheduleFormType, scheduleSchema } from "@/lib/zodSchemas";
 
 export async function CreateCourse(
 	data: ScheduleFormType,

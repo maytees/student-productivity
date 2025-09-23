@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/s3client";
-import { uploadImageSchema } from "@/lib/zodSchemas";
+import { uploadImageSchema } from "@/lib/schemas/zodSchemas";
 
 export async function POST(request: Request) {
 	try {

@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getUsersForms } from "@/app/data/business/user/get-forms";
+import { getUsersForms } from "@/app/data/business/user/forms/get-forms";
 import { Button } from "@/components/ui/button";
 import FormsList from "./_components/FormsList";
 import QuickTemplatesSection from "./_components/QuickTemplatesSection";

@@ -37,7 +37,7 @@ import {
 	TrashIcon,
 } from "lucide-react";
 import { type CSSProperties, useId, useState } from "react";
-import type { FormsType } from "@/app/data/business/user/get-forms";
+import type { FormsType } from "@/app/data/business/user/forms/get-forms";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -78,7 +78,7 @@ const columns: ColumnDef<FormsType>[] = [
 		header: "Type",
 		accessorKey: "isTemplate",
 		cell: ({ row }) => (
-			<Badge variant={row.original.isTemplate ? "outline" : "default"}>
+			<Badge variant={row.original.isTemplate ? "outline" : "primary"}>
 				{row.original.isTemplate ? "Template" : "Form"}
 			</Badge>
 		),
