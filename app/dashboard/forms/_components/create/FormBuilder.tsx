@@ -29,7 +29,6 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import type { Question } from "@/lib/generated/prisma";
 import type {
 	CreateFormSchemaType,
 	QuestionSchemaType,
@@ -49,8 +48,6 @@ import type {
 // 	createdAt: Date;
 // 	updatedAt: Date;
 // };
-
-type QuestionType = Omit<Question, "createdAt" | "updatedAt" | "formId">;
 
 export const FormBuilder = ({
 	addQuestion,

@@ -1,10 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, Save, Settings } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import {
@@ -16,8 +13,8 @@ import FormBuilder from "../_components/create/FormBuilder";
 import QuestionOrder from "../_components/create/QuestionOrder";
 
 const CreateFormPage = () => {
-	const [pending, startTransition] = useTransition();
-	const router = useRouter();
+	// const [pending, startTransition] = useTransition();
+	// const router = useRouter();
 
 	const form = useForm<CreateFormSchemaType>({
 		resolver: zodResolver(createFormSchema),
@@ -32,21 +29,22 @@ const CreateFormPage = () => {
 	// console.log(`${JSON.stringify(form.formState.errors)} is errors`);
 
 	function onSubmit(values: CreateFormSchemaType) {
-		startTransition(async () => {
-			// const { data: result, error } = await tryCatch(CreateCourse(values));
-			// if (error) {
-			// 	toast.error("An unexpected error occurred. Please try again.");
-			// 	return;
-			// }
-			// if (result.status === "success") {
-			// 	toast.success(result.message);
-			// 	form.reset();
-			// 	router.push("/admin/courses");
-			// } else if (result.status === "error") {
-			// 	toast.error(result.message);
-			// }
-			toast.success("Saved", { description: JSON.stringify(form.getValues()) });
-		});
+		console.log(values);
+		// startTransition(async () => {
+		// const { data: result, error } = await tryCatch(CreateCourse(values));
+		// if (error) {
+		// 	toast.error("An unexpected error occurred. Please try again.");
+		// 	return;
+		// }
+		// if (result.status === "success") {
+		// 	toast.success(result.message);
+		// 	form.reset();
+		// 	router.push("/admin/courses");
+		// } else if (result.status === "error") {
+		// 	toast.error(result.message);
+		// }
+		// toast.success("Saved", { description: JSON.stringify(form.getValues()) });
+		// });
 	}
 
 	const arrayReturn = useFieldArray({
@@ -57,13 +55,13 @@ const CreateFormPage = () => {
 	const {
 		fields,
 		append,
-		prepend,
+		// prepend,
 		remove,
-		swap,
-		move,
-		insert,
-		replace,
-		update,
+		// swap,
+		// move,
+		// insert,
+		// replace,
+		// update,
 	} = arrayReturn;
 
 	const addQuestion = () => {
