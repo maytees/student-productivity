@@ -177,7 +177,7 @@ type FormListProps = {
 };
 
 export default function FormsList({ forms }: FormListProps) {
-	const [data, setData] = useState<FormsType[]>(forms);
+	const [data] = useState<FormsType[]>(forms);
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnOrder, setColumnOrder] = useState<string[]>(
 		columns.map((column) => column.id as string),

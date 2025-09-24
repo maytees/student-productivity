@@ -4,19 +4,18 @@ import type { Prettify } from "../utils";
 const questionObject = z
 	.object({
 		type: z.enum([
-			"TEXT",
-			"TEXTAREA",
-			"RADIO",
-			"CHECKBOX",
-			"RATING",
-			"NUMBER",
-			"PHOTO",
-			"YES_NO",
+			"Text",
+			"Radio",
+			"Rating",
+			"Photo",
+			"Number",
+			"Checkbox",
+			"Boolean",
 		]),
 		title: z.string().min(1).max(500),
-		description: z.string().max(500).nullable(),
 		required: z.boolean().default(true).optional(),
 		order: z.number().min(1),
+		helper: z.string().max(100),
 
 		// Different options based on question type
 		options: z

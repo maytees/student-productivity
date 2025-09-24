@@ -1,5 +1,17 @@
 "use client";
-import { Asterisk, LayoutTemplate, PlusCircle, Trash } from "lucide-react";
+import {
+	Asterisk,
+	BinaryIcon,
+	BoxSelect,
+	CameraIcon,
+	CircleDot,
+	LayoutTemplate,
+	PlusCircle,
+	Star,
+	ToggleRight,
+	Trash,
+	TypeIcon,
+} from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
 import {
@@ -29,6 +41,14 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import type {
 	CreateFormSchemaType,
 	QuestionSchemaType,
@@ -77,31 +97,47 @@ export const FormBuilder = ({
 	return (
 		<div className="flex flex-col h-full gap-5">
 			{fields.length > 0 ? (
-				<div className="p-3 space-y-5">
-					<AnimatePresence>
-						{fields.map((question, index) => (
-							<motion.div
-								initial={{ opacity: 0, x: -50 }}
-								animate={{ opacity: 1, x: 0 }}
-								exit={{
-									opacity: 0,
-									x: 50,
-									transition: { duration: 0.3 },
-								}}
-								key={question.id}
-							>
-								<QuestionCard
-									removeQuestion={() => removeQuestion(index)}
-									question={question}
-									index={index}
-									form={form}
-								/>
-							</motion.div>
-						))}
-					</AnimatePresence>
-					{/* {fields.map((question) => (
-						<QuestionCard key={question.id} question={question}></QuestionCard>
-					))} */}
+				<div className="scroll-container overflow-x-hidden overflow-y-auto lg:max-h-[76vh] lg:relative flex-1">
+					<div className="p-3 space-y-5">
+						<AnimatePresence>
+							{fields.map((question, index) => (
+								<motion.div
+									layout
+									initial={{ opacity: 0, scale: 0.9, y: 30 }}
+									animate={{
+										opacity: 1,
+										scale: 1,
+										y: 0,
+										transition: {
+											type: "spring",
+											damping: 20,
+											stiffness: 300,
+											delay: index * 0.1, // Stagger the entrance
+										},
+									}}
+									exit={{
+										opacity: 0,
+										scale: 0.8,
+										x: Math.random() > 0.5 ? 100 : -100, // Random direction
+										rotate: Math.random() * 10 - 5, // Random slight rotation
+										transition: {
+											duration: 0.2 + Math.random() * 0.3, // Random duration between 0.4-0.7s
+											delay: Math.random() * 0.2, // Random delay up to 0.2s
+											ease: "easeInOut",
+										},
+									}}
+									key={question.id}
+								>
+									<QuestionCard
+										removeQuestion={() => removeQuestion(index)}
+										question={question}
+										index={index}
+										form={form}
+									/>
+								</motion.div>
+							))}
+						</AnimatePresence>
+					</div>
 				</div>
 			) : (
 				<div className="flex flex-col items-center justify-center h-full gap-4 mb-42 ">
@@ -148,6 +184,58 @@ const QuestionCard = ({
 				<CardHeader>
 					Question {question.order}
 					<CardToolbar>
+						<FormField
+							control={form.control}
+							name={`questions.${index}.type`}
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<Select
+											onValueChange={field.onChange}
+											defaultValue={field.value}
+										>
+											<SelectTrigger className="[&>span_svg]:text-muted-foreground/80 [&>span]:flex [&>span]:items-center [&>span]:gap-2 [&>span_svg]:shrink-0">
+												<SelectValue placeholder="Question Type" />
+											</SelectTrigger>
+											<SelectContent className="[&_*[role=option]>span>svg]:text-muted-foreground/80 [&_*[role=option]>span]:flex [&_*[role=option]>span]:gap-2 [&_*[role=option]>span>svg]:shrink-0">
+												<SelectItem value="Text">
+													<TypeIcon size={16} aria-hidden="true" />
+													<span className="">Text</span>
+												</SelectItem>
+												<SelectItem value="Number">
+													<BinaryIcon size={16} aria-hidden="true" />
+													<span className="">Number</span>
+												</SelectItem>
+												<SelectItem value="Boolean">
+													<ToggleRight size={16} aria-hidden="true" />
+													<span className="">Yes/No</span>
+												</SelectItem>
+												<SelectItem value="Radio">
+													<CircleDot size={16} aria-hidden="true" />
+													<span className="">Single Select</span>
+												</SelectItem>
+												<SelectItem value="Checkbox">
+													<BoxSelect size={16} aria-hidden="true" />
+													<span className="">Multi-select</span>
+												</SelectItem>
+												<SelectItem value="Rating">
+													<Star size={16} aria-hidden="true" />
+													<span className="">Rating</span>
+												</SelectItem>
+												<SelectItem value="Photo">
+													<CameraIcon size={16} aria-hidden="true" />
+													<span className="">Photo</span>
+												</SelectItem>
+											</SelectContent>
+										</Select>
+									</FormControl>
+									{/* <FormDescription>
+								Question you&apos;re asking the shopper
+							</FormDescription> */}
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 						<AlertDialog>
 							<AlertDialogTrigger asChild>
 								<Button variant={"foreground"}>
@@ -174,7 +262,7 @@ const QuestionCard = ({
 					</CardToolbar>
 				</CardHeader>
 			</CardHeading>
-			<CardContent>
+			<CardContent className="space-y-5">
 				<FormField
 					control={form.control}
 					name={`questions.${index}.title`}
@@ -187,40 +275,45 @@ const QuestionCard = ({
 									placeholder="What are you asking the shopper?"
 								/>
 							</FormControl>
-							{/* <FormDescription>
-								Question you&apos;re asking the shopper
-							</FormDescription> */}
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				{/* <Input
-					{...form.register(`questions.${index}.title`)}
-					defaultValue={question.title}
+
+				<FormField
+					control={form.control}
+					name={`questions.${index}.helper`}
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Helper</FormLabel>
+							<FormControl>
+								<Input {...field} placeholder="Explain the answer" />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
 				/>
-				<select {...form.register(`questions.${index}.type`)}>
-					<option value="TEXT">Text</option>
-					<option value="RADIO">Radio</option>
-				</select> */}
+
+				<FormField
+					control={form.control}
+					name={`questions.${index}.required`}
+					render={({ field }) => (
+						<FormItem className="flex flex-row-reverse items-center gap-2">
+							<FormControl>
+								<Switch
+									size={"sm"}
+									checked={field.value}
+									onCheckedChange={field.onChange}
+								/>
+							</FormControl>
+							<FormLabel>Required</FormLabel>
+							{/* <FormMessage /> */}
+						</FormItem>
+					)}
+				/>
 			</CardContent>
 		</Card>
 	);
 };
 
 export default FormBuilder;
-
-// <div key={question.id}>
-// 	{/* Question fields */}
-// 	<input
-// 		{...form.register(`questions.${index}.title`)}
-// 		placeholder="Question title"
-// 	/>
-// 	<select {...form.register(`questions.${index}.type`)}>
-// 		<option value="TEXT">Text</option>
-// 		<option value="RADIO">Radio</option>
-// 		{/* ... other options */}
-// 	</select>
-// 	<button type="button" onClick={() => removeQuestion(index)}>
-// 		Remove
-// 	</button>
-// </div>

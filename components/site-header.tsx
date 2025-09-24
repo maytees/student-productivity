@@ -17,13 +17,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 export function SiteHeader() {
 	const pathname = usePathname();
 
-	const getPageTitle = (path: string) => {
-		if (path === "/dashboard") return "Dashboard";
-		if (path === "/dashboard/schedule") return "Schedule Video";
-		// Add more routes as needed
-		return "Dashboard";
-	};
-
 	const getBreadcrumbs = (path: string) => {
 		const segments = path.split("/").filter(Boolean);
 		const breadcrumbs = [];

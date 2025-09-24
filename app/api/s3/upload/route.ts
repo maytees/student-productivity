@@ -2,9 +2,16 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
+import z from "zod";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/s3client";
-import { uploadImageSchema } from "@/lib/schemas/zodSchemas";
+
+const uploadImageSchema = z.object({
+	fileName: z.string().min(1, { message: "Filename is required" }),
+	contentType: z.string().min(1, { message: "Content type is required" }),
+	size: z.number().min(1, { message: "Size is required" }),
+	isImage: z.boolean(),
+});
 
 export async function POST(request: Request) {
 	try {

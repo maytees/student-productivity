@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, Save, Settings } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import {
@@ -23,13 +24,14 @@ const CreateFormPage = () => {
 			description: "",
 			questions: [],
 		},
-		mode: "onBlur",
+		mode: "onSubmit",
 	});
 
 	// console.log(`${JSON.stringify(form.formState.errors)} is errors`);
 
 	function onSubmit(values: CreateFormSchemaType) {
 		console.log(values);
+		toast.success("Saved", { description: JSON.stringify(form.getValues()) });
 		// startTransition(async () => {
 		// const { data: result, error } = await tryCatch(CreateCourse(values));
 		// if (error) {
@@ -43,7 +45,6 @@ const CreateFormPage = () => {
 		// } else if (result.status === "error") {
 		// 	toast.error(result.message);
 		// }
-		// toast.success("Saved", { description: JSON.stringify(form.getValues()) });
 		// });
 	}
 
@@ -66,18 +67,17 @@ const CreateFormPage = () => {
 
 	const addQuestion = () => {
 		append({
-			type: "TEXT",
+			type: "Text",
 			title: "",
-			description: null,
 			options: null,
 			order: fields.length + 1,
 			required: true,
+			helper: "",
 		});
 	};
 
 	const removeQuestion = (index: number) => {
 		remove(index);
-
 		const currentQuestions = form.getValues("questions");
 		currentQuestions.forEach((_, questionIndex) => {
 			form.setValue(`questions.${questionIndex}.order`, questionIndex + 1);
@@ -91,10 +91,15 @@ const CreateFormPage = () => {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)}>
 				<div className="flex flex-col h-full lg:flex-row ">
-					<div className="sticky lg:h-[calc(100vh-74px)] max-lg:border-b max-lg:pb-5 lg:w-1/3 ">
-						<QuestionOrder addQuestion={addQuestion} />
-					</div>
-					<div className="flex flex-col w-full gap-2 py-4">
+					<aside className="lg:h-[calc(100vh-74px)] lg:sticky lg:top-0 max-lg:border-b max-lg:pb-5 lg:w-1/2 ">
+						<QuestionOrder
+							form={form}
+							fields={fields}
+							arrayReturn={arrayReturn}
+							addQuestion={addQuestion}
+						/>
+					</aside>
+					<div className="flex flex-col h-full w-full gap-2 py-4 lg:h-[calc(100vh-74px)]">
 						<div className="flex flex-row max-lg:py-2 max-lg:flex-col-reverse max-lg:gap-5 justify-between px-3 border-b">
 							<div className="flex flex-col items-start">
 								<h1 className="max-w-lg text-xl font-bold">
