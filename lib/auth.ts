@@ -25,7 +25,6 @@ export const auth = betterAuth({
 					from: "Molnr <molnr@molnr.app>",
 					to: [email],
 					subject: "Molnr - Verify your email",
-					// html: `<p>Your OTP is <strong>${otp}</strong></p>`,
 					react: OtpEmail({ otp, email }),
 				});
 			},

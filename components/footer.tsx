@@ -18,7 +18,7 @@ export function Footer() {
 					<div className="flex flex-col">
 						<span className="text-sm font-medium text-foreground">Flicker</span>
 						<span className="text-xs text-muted-foreground ">
-							© {currentYear} Flicker, Inc.
+							© {currentYear} Molnr - Your peer.
 						</span>
 					</div>
 				</div>

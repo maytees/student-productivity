@@ -8,7 +8,7 @@ export default function TooltipDemo() {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="outline">
-            <Info className="h-4 w-4" />
+            <Info className="w-4 h-4" />
             Default tooltip
           </Button>
         </TooltipTrigger>

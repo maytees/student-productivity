@@ -1,20 +1,20 @@
 "use client";
 
+import { IconHelp, IconSearch, IconSettings } from "@tabler/icons-react";
 import {
-	IconAnalyze,
-	IconCalendar,
-	IconChartBar,
-	IconDashboard,
-	IconDatabase,
-	IconFileAi,
-	IconForms,
-	IconHelp,
-	IconNavigation,
-	IconReport,
-	IconSearch,
-	IconSettings,
-} from "@tabler/icons-react";
-import { Asterisk } from "lucide-react";
+	BarChart3Icon,
+	BookOpenIcon,
+	BrainIcon,
+	CalendarIcon,
+	CardSimIcon,
+	FlameIcon,
+	GraduationCap,
+	HomeIcon,
+	NotebookIcon,
+	PaperclipIcon,
+	TimerIcon,
+	TrophyIcon,
+} from "lucide-react";
 import Link from "next/link";
 import type * as React from "react";
 import { NavMain } from "@/components/nav-main";
@@ -29,49 +29,75 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { NavStats } from "./nav-stats";
+import { NavStudy } from "./nav-study";
 
 const data = {
-	user: {
-		name: "shadcn",
-		email: "m@example.com",
-		avatar: "/avatars/shadcn.jpg",
-	},
 	navMain: [
 		{
-			title: "Dashboard",
-			url: "/dashboard",
-			icon: IconDashboard,
+			title: "Home",
+			url: "/home",
+			icon: HomeIcon,
 		},
 		{
-			title: "Forms",
-			url: "/dashboard/forms",
-			icon: IconForms,
-		},
-		{
-			title: "Calendar",
-			url: "/dashboard/calendar",
-			icon: IconCalendar,
+			title: "Notes",
+			url: "/notes",
+			icon: NotebookIcon,
 		},
 		{
 			title: "Assignments",
-			url: "/dashboard/assignments",
-			icon: IconNavigation,
+			url: "/assignments",
+			icon: PaperclipIcon,
 		},
 		{
-			title: "Reports",
-			url: "/dashboard/reports",
-			icon: IconAnalyze,
+			title: "Courses",
+			url: "/courses",
+			icon: BookOpenIcon,
 		},
 		{
-			title: "Analytics",
-			url: "/dashboard/analytics",
-			icon: IconChartBar,
+			title: "Calendar",
+			url: "/calendar",
+			icon: CalendarIcon,
+		},
+	],
+	navStudy: [
+		{
+			title: "Quiz",
+			url: "/quiz",
+			icon: BrainIcon,
+		},
+		{
+			title: "Flashcards",
+			url: "/Flashcards",
+			icon: CardSimIcon,
+		},
+		{
+			title: "Pomodoro",
+			url: "/pomodoro",
+			icon: TimerIcon,
+		},
+	],
+	navStats: [
+		{
+			title: "Progress",
+			url: "/progress",
+			icon: BarChart3Icon,
+		},
+		{
+			title: "Streaks",
+			url: "/streaks",
+			icon: FlameIcon,
+		},
+		{
+			title: "Milestones",
+			url: "/milestones",
+			icon: TrophyIcon,
 		},
 	],
 	navSecondary: [
 		{
 			title: "Settings",
-			url: "/dashboard/settings",
+			url: "/settings",
 			icon: IconSettings,
 		},
 		{
@@ -85,28 +111,11 @@ const data = {
 			icon: IconSearch,
 		},
 	],
-	documents: [
-		{
-			name: "Content Library",
-			url: "/dashboard/content",
-			icon: IconDatabase,
-		},
-		{
-			name: "Templates",
-			url: "/dashboard/templates",
-			icon: IconFileAi,
-		},
-		{
-			name: "Reports",
-			url: "/dashboard/reports",
-			icon: IconReport,
-		},
-	],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	return (
-		<Sidebar collapsible="offcanvas" {...props}>
+		<Sidebar {...props}>
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
@@ -115,7 +124,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 							className="data-[slot=sidebar-menu-button]:!p-1.5 "
 						>
 							<Link href="/">
-								<Asterisk className="!size-5" />
+								<GraduationCap className="!size-5" />
 								<span className="text-base font-semibold">Molnr</span>
 							</Link>
 						</SidebarMenuButton>
@@ -124,7 +133,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			</SidebarHeader>
 			<SidebarContent>
 				<NavMain items={data.navMain} />
-				{/* <NavDocuments items={data.documents} /> */}
+				<NavStudy items={data.navStudy} />
+				<NavStats items={data.navStats} />
+				{/* <NavCourses items={data.documents} /> */}
 				<NavSecondary items={data.navSecondary} className="mt-auto" />
 			</SidebarContent>
 			<SidebarFooter>

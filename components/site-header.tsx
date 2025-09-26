@@ -1,6 +1,4 @@
 "use client";
-
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import {
@@ -21,72 +19,153 @@ export function SiteHeader() {
 		const segments = path.split("/").filter(Boolean);
 		const breadcrumbs = [];
 
-		if (segments.length > 1) {
+		// Main nav items
+		if (segments[0] === "home") {
 			breadcrumbs.push({
-				label: "Dashboard",
-				href: "/dashboard",
+				label: "Home",
+				href: "/home",
+				isLast: segments[1] === undefined,
+			});
+		}
+
+		if (segments[0] === "calendar") {
+			breadcrumbs.push({
+				label: "Calendar",
+				href: "/calendar",
+				isLast: segments[1] === undefined,
+			});
+		}
+
+		if (segments[0] === "notes") {
+			breadcrumbs.push({
+				label: "Notes",
+				href: "/notes",
+				isLast: segments[1] === undefined,
+			});
+			if (segments[1] === "create") {
+				breadcrumbs.push({
+					label: "Create",
+					href: "/notes/create",
+					isLast: true,
+				});
+			}
+		}
+
+		if (segments[0] === "assignments") {
+			breadcrumbs.push({
+				label: "Assignments",
+				href: "/assignments",
+				isLast: segments[1] === undefined,
+			});
+			if (segments[1] === "create") {
+				breadcrumbs.push({
+					label: "Create",
+					href: "/assignments/create",
+					isLast: true,
+				});
+			}
+		}
+
+		if (segments[0] === "courses") {
+			breadcrumbs.push({
+				label: "Courses",
+				href: "/courses",
+				isLast: segments[1] === undefined,
+			});
+			if (segments[1] === "create") {
+				breadcrumbs.push({
+					label: "Create",
+					href: "/courses/create",
+					isLast: true,
+				});
+			}
+		}
+
+		// Study tools
+		if (segments[0] === "quiz") {
+			breadcrumbs.push({
+				label: "Study",
+				href: "/study",
 				isLast: false,
 			});
-
-			if (segments[1] === "assignments") {
-				breadcrumbs.push({
-					label: "Assignments",
-					href: "/dashboard/assignments",
-					isLast: segments[2] === undefined,
-				});
-
-				if (segments[2] === "create") {
-					breadcrumbs.push({
-						label: "Create",
-						href: "/dashboard/assignments/create",
-						isLast: true,
-					});
-				}
-			}
-
-			if (segments[1] === "forms") {
-				breadcrumbs.push({
-					label: "Forms",
-					href: "/dashboard/forms",
-					isLast: segments[2] === undefined,
-				});
-
-				if (segments[2] === "create") {
-					breadcrumbs.push({
-						label: "Create",
-						href: "/dashboard/forms/create",
-						isLast: true,
-					});
-				}
-			}
-
-			if (segments[1] === "calendar") {
-				breadcrumbs.push({
-					label: "Calendar",
-					href: "/dashboard/calendar",
-					isLast: true,
-				});
-			}
-
-			if (segments[1] === "reports") {
-				breadcrumbs.push({
-					label: "Reports",
-					href: "/dashboard/reports",
-					isLast: true,
-				});
-			}
-
-			if (segments[1] === "analytics") {
-				breadcrumbs.push({
-					label: "Analytics",
-					href: "/dashboard/analytics",
-					isLast: true,
-				});
-			}
-		} else if (segments[0] === "dashboard") {
 			breadcrumbs.push({
-				label: "Dashboard",
-				href: "/dashboard",
+				label: "Quiz",
+				href: "/quiz",
+				isLast: true,
+			});
+		}
+
+		if (segments[0] === "flashcards") {
+			breadcrumbs.push({
+				label: "Study",
+				href: "/study",
+				isLast: false,
+			});
+			breadcrumbs.push({
+				label: "Flashcards",
+				href: "/flashcards",
+				isLast: true,
+			});
+		}
+
+		if (segments[0] === "pomodoro") {
+			breadcrumbs.push({
+				label: "Study",
+				href: "/study",
+				isLast: false,
+			});
+			breadcrumbs.push({
+				label: "Pomodoro",
+				href: "/pomodoro",
+				isLast: true,
+			});
+		}
+
+		// Stats section
+		if (segments[0] === "progress") {
+			breadcrumbs.push({
+				label: "Stats",
+				href: "/stats",
+				isLast: false,
+			});
+			breadcrumbs.push({
+				label: "Progress",
+				href: "/progress",
+				isLast: true,
+			});
+		}
+
+		if (segments[0] === "streaks") {
+			breadcrumbs.push({
+				label: "Stats",
+				href: "/stats",
+				isLast: false,
+			});
+			breadcrumbs.push({
+				label: "Streaks",
+				href: "/streaks",
+				isLast: true,
+			});
+		}
+
+		if (segments[0] === "milestones") {
+			breadcrumbs.push({
+				label: "Stats",
+				href: "/stats",
+				isLast: false,
+			});
+			breadcrumbs.push({
+				label: "Milestones",
+				href: "/milestones",
+				isLast: true,
+			});
+		}
+
+		// Secondary nav
+		if (segments[0] === "settings") {
+			breadcrumbs.push({
+				label: "Settings",
+				href: "/settings",
 				isLast: true,
 			});
 		}
@@ -96,34 +175,30 @@ export function SiteHeader() {
 	const breadcrumbs = getBreadcrumbs(pathname);
 
 	return (
-		<header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
-			<div className="flex items-center w-full px-4 gap-1 lg:gap-2 lg:px-6">
-				<SidebarTrigger className="-ml-1" />
-				<Separator
-					orientation="vertical"
-					className="mx-2 data-[orientation=vertical]:h-4"
-				/>
-				<Breadcrumb>
-					<BreadcrumbList>
-						{breadcrumbs.map((breadcrumb) => (
-							<React.Fragment key={breadcrumb.href}>
-								<BreadcrumbItem key={breadcrumb.href}>
-									{breadcrumb.isLast ? (
-										<BreadcrumbPage className="text-base font-medium">
-											{breadcrumb.label}
-										</BreadcrumbPage>
-									) : (
-										<BreadcrumbLink asChild className="text-base font-medium">
-											<Link href={breadcrumb.href}>{breadcrumb.label}</Link>
-										</BreadcrumbLink>
-									)}
-								</BreadcrumbItem>
-								{!breadcrumb.isLast && <BreadcrumbSeparator />}
-							</React.Fragment>
-						))}
-					</BreadcrumbList>
-				</Breadcrumb>
-			</div>
+		<header className="flex items-center h-16 px-4 shrink-0 gap-2">
+			<SidebarTrigger className="-ml-1" />
+			<Separator
+				orientation="vertical"
+				className="mr-2 data-[orientation=vertical]:h-4"
+			/>
+			<Breadcrumb>
+				<BreadcrumbList>
+					{breadcrumbs.map((breadcrumb) => (
+						<React.Fragment key={breadcrumb.href}>
+							<BreadcrumbItem>
+								{breadcrumb.isLast ? (
+									<BreadcrumbPage>{breadcrumb.label}</BreadcrumbPage>
+								) : (
+									<BreadcrumbLink href={breadcrumb.href}>
+										{breadcrumb.label}
+									</BreadcrumbLink>
+								)}
+							</BreadcrumbItem>
+							{!breadcrumb.isLast && <BreadcrumbSeparator />}
+						</React.Fragment>
+					))}
+				</BreadcrumbList>
+			</Breadcrumb>
 		</header>
 	);
 }

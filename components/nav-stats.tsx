@@ -12,7 +12,7 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-export function NavMain({
+export function NavStats({
 	items,
 }: {
 	items: {
@@ -22,11 +22,11 @@ export function NavMain({
 	}[];
 }) {
 	const pathname = usePathname();
+
 	return (
 		<SidebarGroup>
-			<SidebarGroupLabel>Main</SidebarGroupLabel>
+			<SidebarGroupLabel>Stats</SidebarGroupLabel>
 			<SidebarGroupContent className="flex flex-col gap-2">
-				<SidebarMenu></SidebarMenu>
 				<SidebarMenu>
 					{items.map((item) => (
 						<SidebarMenuItem key={item.title}>

@@ -1,4 +1,4 @@
-import { Asterisk } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Header } from "@/components/header";
@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
 						className="flex items-center self-center text-xl font-bold gap-2"
 						href="/"
 					>
-						<Asterisk className="size-8" />
+						<GraduationCap className="size-8" />
 						Molnr
 					</Link>
 					{children}

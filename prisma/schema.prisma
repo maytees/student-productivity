@@ -13,40 +13,17 @@ generator client {
 }
 
 model User {
-  id            String   @id
+  id            String  @id
   name          String
-  phone         String?
-  userRole      UserRole @default(Undecided)
   email         String
-  emailVerified Boolean  @default(false)
+  emailVerified Boolean @default(false)
   image         String?
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
   sessions  Session[]
   accounts  Account[]
-
-  // Business Specific
-  businessName     String?
-  businessType     String?
-  stripeCustomerId String?
-
-  // Shopper Specific
-  dateOfBirth     DateTime?
-  address         String?
-  city            String?
-  state           String?
-  zipCode         String?
-  backgroundCheck Boolean   @default(false)
-  rating          Float?
-  totalShops      Int       @default(0)
-
-  businessShops Shop[]       @relation("BusinessShops")
-  shopperShops  Shop[]       @relation("ShopperShops")
-  forms         Form[]
-  submissions   Submission[]
-  payments      Payment[]
-  reviews       Review[]
+  Course    Course[]
 
   @@unique([email])
   @@map("user")
@@ -56,12 +33,18 @@ model Session {
   id        String   @id
   expiresAt DateTime
   token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Student info
+  school String?
+  major  String?
+  year   String? // Freshman, Sophmore, etc
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  courses Course[]
 
   @@unique([token])
   @@map("session")
@@ -97,229 +80,31 @@ model Verification {
   @@map("verification")
 }
 
-model Form {
-  id           String  @id @default(cuid())
-  title        String
-  description  String?
-  isTemplate   Boolean @default(false)
-  templateName String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)
-  createdById String
-
-  questions Question[]
-  shops     Shop[]
-
-  @@map("forms")
-}
-
-model Question {
-  id       String       @id @default(cuid())
-  formId   String
-  type     QuestionType
-  title    String
-  required Boolean      @default(false)
-  order    Int
-  options  Json? // e.g radio/checkbox options
-  metadata Json? // Maybe useful?
-  helper   String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  form    Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
-  answers Answer[]
-
-  @@map("questions")
-}
-
-model Shop {
-  id          String @id @default(cuid())
-  title       String
-  description String
-  location    String
-  address     String
-
-  basePrice       Float // Platform fee
-  reimburseAmount Float // Amount to reimbruse shopper for purchase
-  shopperPayment  Float // Payment to shopper for their time
-  totalCost       Float // Total business pays
-  status          ShopStatus @default(Draft)
-
-  isRecurring    Boolean        @default(false)
-  recurrenceType RecurrenceType @default(None)
-  frequency      Int? // How many times?
-
-  // Time periods
-  startTime String?
-  endTime   String?
-
-  scheduledDate DateTime? // For specific date
-  allowedDays   DayOfWeek[] // Which days of the week are allowed for random?
-
-  // Recurrence management
-  parentShopId String? // link to original recurring shop
-  parentShop   Shop?   @relation("RecurringShops", fields: [parentShopId], references: [id])
-  childShops   Shop[]  @relation("RecurringShops")
-
-  recurrenceStart DateTime?
-  recurrenceEnd   DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  business   User         @relation("BusinessShops", fields: [businessId], references: [id])
-  businessId String
-  shopper    User?        @relation("ShopperShops", fields: [shopperId], references: [id])
-  shopperId  String?
-  form       Form         @relation(fields: [formId], references: [id])
-  formId     String
-  Submission Submission[]
-  Payment    Payment[]
-  Review     Review[]
-}
-
-model Submission {
-  id     String @id @default(cuid())
-  shopId String
-
-  shopperId   String
-  submittedAt DateTime  @default(now())
-  reviewedAt  DateTime?
-
-  visitTime  DateTime?
-  receiptUrl String?
-
-  shop    Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
-  shopper User     @relation(fields: [shopperId], references: [id])
-  answers Answer[]
-
-  @@unique([shopId, shopperId])
-  @@map("submissions")
-}
-
-model Answer {
-  id           String @id @default(cuid())
-  submissionId String
-  questionId   String
-  value        Json
-  fileUrls     Json? // Array of file urls for photo question, with id of question maybe?
-
-  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
-  question   Question   @relation(fields: [questionId], references: [id])
-
-  @@unique([submissionId, questionId])
-  @@map("answers")
-}
-
-model Payment {
-  id         String  @id @default(cuid())
-  shopId     String
-  businessId String
-  shopperId  String?
-
-  amount        Float
-  platformFee   Float
-  shopperAmount Float?
-
-  status                PaymentStatus @default(Pending)
-  stripePaymentIntentId String?
-  stripeTransferId      String?
-
-  createdAt   DateTime  @default(now())
-  processedAt DateTime?
+model Course {
+  id          String  @id @default(cuid())
+  name        String
+  code        String? // e.g., "CS101", "MATH204"
+  description String?
+  color       String  @default("#3b82f6") // hex color for UI
+  semester    String? // e.g., "Fall 2024", "Spring 2025"
+  instructor  String?
+  image       String?
+  credits     Int?
+  isActive    Boolean @default(true)
+  syllabusUrl String?
+  coursePage  String? // e.g canvas.com/courses/hist (fake path)
 
   // Relations
-  shop     Shop @relation(fields: [shopId], references: [id])
-  business User @relation(fields: [businessId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("payments")
-}
-
-model Review {
-  id         String @id @default(cuid())
-  shopId     String
-  reviewerId String // Who left the review
-  revieweeId String // Who is being reviewed
-
-  rating  Int // 1-5 (stars)
-  comment String?
-
-  createdAt DateTime @default(now())
-
-  shop     Shop @relation(fields: [shopId], references: [id])
-  reviewer User @relation(fields: [reviewerId], references: [id])
-
-  @@unique([shopId, reviewerId])
-  @@map("reviews")
-}
-
-model Template {
-  id          String  @id @default(cuid())
-  name        String  @unique
-  title       String
-  Description String
-  category    String
-  imageUrl    String?
-  formData    Json // serialized form structure
+  // notes       Note[]
+  // assignments Assignment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Session   Session? @relation(fields: [sessionId], references: [id])
+  sessionId String?
 
-  @@map("templates")
-}
-
-enum UserRole {
-  Undecided
-  Business
-  Shopper
-  Admin
-}
-
-enum ShopStatus {
-  Draft
-  Active
-  Claimed
-  Completed
-  Approved
-  Rejected
-  Cancelled
-}
-
-enum PaymentStatus {
-  Pending
-  Processing
-  Completed
-  Failed
-  Refunded
-}
-
-enum QuestionType {
-  Text
-  Radio
-  Checkbox
-  Rating
-  Number
-  Photo
-  Boolean // Yes/No
-}
-
-enum RecurrenceType {
-  None // One-time shop
-  Weekly // X times per week
-  Monthly // X times per month
-  Specific // Specific days of week
-}
-
-enum DayOfWeek {
-  Monday
-  Tuesday
-  Wednesday
-  Thursday
-  Friday
-  Saturday
-  Sunday
+  @@unique([userId, code]) // Prevent duplicate course codes per user
 }

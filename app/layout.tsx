@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Lato } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+const lato = Lato({
+	weight: ["100", "300", "400", "700", "900"],
 });
 
 export const metadata: Metadata = {
-	title: "Molnr — Social Media, Simplified",
-	description:
-		"Ultra-simplified cross-posting and enterprise brand governance in one platform.",
+	title: "Molnr — Your Personal Peer",
+	description: "All in one platform for academic productivity.",
 };
 
 export default function RootLayout({
@@ -23,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistMono.variable} antialiased selection:bg-indigo-200/60 selection:text-neutral-900`}
+				className={`${lato.className} antialiased selection:bg-indigo-200/60 selection:text-neutral-900`}
 			>
 				<ThemeProvider
 					attribute="class"

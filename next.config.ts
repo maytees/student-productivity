@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
 			"www.google.com",
 			"images.squarespace-cdn.com",
 			"images.unsplash.com",
+			"inst-fs-pdx-prod.inscloudgate.net",
 		],
 	},
 };

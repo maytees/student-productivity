@@ -94,7 +94,7 @@ export default function OtpEmail({
 
 							<Section className="mb-4">
 								<Text className="m-0 text-xl font-bold text-gray-900">
-									Flicker
+									Molnr
 								</Text>
 								<Text className="m-0 mt-1 text-sm text-gray-600">
 									Your verification code
