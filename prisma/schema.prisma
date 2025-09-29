@@ -19,11 +19,12 @@ model User {
   emailVerified Boolean @default(false)
   image         String?
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
-  sessions  Session[]
-  accounts  Account[]
-  Course    Course[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now()) @updatedAt
+  sessions   Session[]
+  accounts   Account[]
+  Course     Course[]
+  Assignment Assignment[]
 
   @@unique([email])
   @@map("user")
@@ -101,10 +102,66 @@ model Course {
   // notes       Note[]
   // assignments Assignment[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Session   Session? @relation(fields: [sessionId], references: [id])
-  sessionId String?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Session    Session?     @relation(fields: [sessionId], references: [id])
+  sessionId  String?
+  Assignment Assignment[]
 
   @@unique([userId, code]) // Prevent duplicate course codes per user
+}
+
+model Assignment {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  dueDate     DateTime?
+  startDate   DateTime? // When to start working on it
+
+  // Status and priority
+  status   String @default("todo") // "todo", "in_progress", "completed"
+  priority String @default("medium") // "low", "medium", "high"
+
+  // Assignment details
+  type   String? // "homework", "quiz", "exam", "project", "reading"
+  points Int? // Total points worth
+  weight Float? // Percentage of final grade
+
+  // Links and files
+  url     String? // Link to assignment (Canvas, etc.)
+  fileUrl String? // Uploaded file
+
+  // Progress tracking
+  // estimatedTime Int? // Minutes estimated to complete
+  // actualTime    Int? // Minutes actually spent
+  completedAt DateTime?
+
+  // Relations
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Subtasks for breaking down big assignments
+  subtasks Subtask[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, status])
+  @@index([userId, dueDate])
+}
+
+model Subtask {
+  id        String  @id @default(cuid())
+  title     String
+  completed Boolean @default(false)
+  order     Int     @default(0)
+
+  assignmentId String
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

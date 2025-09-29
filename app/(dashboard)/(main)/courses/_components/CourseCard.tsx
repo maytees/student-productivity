@@ -1,7 +1,7 @@
 "use client";
 
 import { Archive, ExternalLink, MoreVertical, Trash2 } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -54,7 +54,7 @@ export function CourseCard({
 					<div className={`h-2 w-full ${color}`} />
 
 					{/* Course Image */}
-					<div className="relative h-32 overflow-hidden">
+					{/* <div className="relative h-32 overflow-hidden">
 						<Image
 							src={image || "/placeholder.svg"}
 							alt={`${title} course image`}
@@ -62,7 +62,7 @@ export function CourseCard({
 							className="object-cover transition-transform duration-200 group-hover:scale-105"
 						/>
 						<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-					</div>
+					</div> */}
 
 					{/* Dropdown Menu */}
 					<div className="absolute right-2 top-4">
@@ -78,9 +78,11 @@ export function CourseCard({
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end" className="w-48">
-								<DropdownMenuItem onClick={() => onGoToCourse?.(id)}>
-									<ExternalLink className="w-4 h-4 mr-2" />
-									Go to Course
+								<DropdownMenuItem asChild>
+									<Link href={`/courses/${id}`}>
+										<ExternalLink className="w-4 h-4 mr-2" />
+										Go to Course
+									</Link>
 								</DropdownMenuItem>
 								<DropdownMenuSeparator />
 								{/* <DropdownMenuItem onClick={() => setImageDialogOpen(true)}>
@@ -129,24 +131,12 @@ export function CourseCard({
 						</div>
 
 						{/* Go to Course Button */}
-						<Button
-							variant={"mono"}
-							onClick={() => onGoToCourse?.(id)}
-							className="w-full mt-3"
-							size="sm"
-						>
-							Go to Course
+						<Button variant={"mono"} asChild className="w-full mt-3" size="sm">
+							<Link href={`/courses/${id}`}>Go to Course</Link>
 						</Button>
 					</div>
 				</CardContent>
 			</Card>
-
-			{/* <ImageSelectorDialog
-				open={imageDialogOpen}
-				onOpenChange={setImageDialogOpen}
-				onImageSelect={handleImageSelect}
-				currentImage={image}
-			/> */}
 
 			<DeleteCourseDialog
 				open={deleteDialogOpen}

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const CourseColor = z.enum([
+export const CourseColor = z.enum([
 	"bg-red-400",
 	"bg-orange-400",
 	"bg-amber-400",
@@ -19,7 +19,7 @@ export const courseSchema = z.object({
 	code: z.string(),
 	description: z
 		.string()
-		.max(200, { error: "Description shouldn't exceed 200 characters!" })
+		.max(600, { error: "Description shouldn't exceed 1,000 characters!" })
 		.optional(),
 	color: CourseColor.default("bg-blue-400").optional(),
 	semester: z

@@ -77,3 +77,40 @@ export async function deleteCourse(
 		};
 	}
 }
+
+export async function updateCourse(
+	id: string,
+	values: CourseSchemaType,
+): Promise<ApiResponse> {
+	await requireUser();
+
+	try {
+		const validation = courseSchema.safeParse(values);
+
+		if (!validation.success) {
+			return {
+				status: "error",
+				message: "Invalid Form Data",
+			};
+		}
+
+		await prisma.course.update({
+			where: {
+				id,
+			},
+			data: {
+				...validation.data,
+			},
+		});
+
+		return {
+			status: "success",
+			message: "Course updated succesfully",
+		};
+	} catch {
+		return {
+			status: "error",
+			message: "Failed to update course",
+		};
+	}
+}
