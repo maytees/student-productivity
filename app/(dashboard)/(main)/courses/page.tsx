@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { getAllCourses } from "@/app/data/user/get-all-courses";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { CourseCard } from "./_components/CourseCard";
 
 const CoursePage = () => {
@@ -19,7 +20,16 @@ const CoursePage = () => {
 			</div>
 
 			{/* TODO: Skeleton fallback */}
-			<Suspense fallback={"Loading Courses..."}>
+			<Suspense
+				fallback={
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+						<Skeleton className="w-96 h-36 rounded-3xl" />
+						<Skeleton className="w-96 h-36 rounded-3xl" />
+						<Skeleton className="w-96 h-36 rounded-3xl" />
+						<Skeleton className="w-96 h-36 rounded-3xl" />
+					</div>
+				}
+			>
 				<RenderCourses />
 			</Suspense>
 		</div>
