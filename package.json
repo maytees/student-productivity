@@ -9,7 +9,7 @@
 		"db:generate": "prisma generate",
 		"db:push": "prisma db push",
 		"lint": "eslint",
-		"postinstall": "prisma generate"
+		"postinstall": "primsa push && prisma generate"
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.888.0",
