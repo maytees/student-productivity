@@ -12,7 +12,7 @@ export async function DELETE(request: Request) {
 		}
 
 		const command = new DeleteObjectCommand({
-			Bucket: env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES,
+			Bucket: env.NEXT_PUBLIC_S3_BUCKET_NAME_UPLOADS,
 			Key: key,
 		});
 

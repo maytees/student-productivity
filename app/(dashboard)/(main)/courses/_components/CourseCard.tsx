@@ -37,11 +37,11 @@ export function CourseCard({
 	code,
 	semester,
 	color,
-	image,
+	// image,
 	isArchived = false,
 	onArchive,
-	onDelete,
-	onGoToCourse,
+	// onDelete,
+	// onGoToCourse,
 	// onImageChange,
 }: CourseCardProps) {
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
