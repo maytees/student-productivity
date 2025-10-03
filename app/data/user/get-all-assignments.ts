@@ -15,7 +15,6 @@ export async function getAllAssignments() {
 			title: true,
 			description: true,
 			dueDate: true,
-			startDate: true,
 			status: true,
 			priority: true,
 			type: true,

@@ -33,8 +33,8 @@ const Footer = () => {
 				<div className="py-12 flex flex-col sm:flex-row items-start justify-between gap-x-8 gap-y-10 px-6 xl:px-0">
 					<div>
 						{/* Logo */}
+						{/** biome-ignore lint/a11y/noSvgWithoutTitle: a */}
 						<svg
-							id="logo-7"
 							width="124"
 							height="32"
 							viewBox="0 0 124 32"
