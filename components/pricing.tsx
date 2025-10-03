@@ -76,7 +76,6 @@ const Pricing = () => {
 	const [selectedBillingPeriod, setSelectedBillingPeriod] = useState("monthly");
 
 	return (
-		// biome-ignore lint/correctness/useUniqueElementIds: nav
 		<div
 			id="pricing"
 			className="flex flex-col items-center justify-center py-12 xs:py-20 px-6"
