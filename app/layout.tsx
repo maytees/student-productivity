@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
+import { Lato } from "next/font/google";
 
 const lato = Lato({
-	weight: ["100", "300", "400", "700", "900"],
+	weight: ["400", "700", "900"],
+	subsets: ["latin"],
+	variable: "--font-lato",
 });
 
 export const metadata: Metadata = {
