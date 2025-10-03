@@ -1,12 +1,12 @@
+import { Navbar } from "@/components/navbar";
 import { GraduationCap } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Header } from "@/components/header";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
 	return (
 		<div>
-			<Header />
+			<Navbar />
 			<div className="flex h-[80svh] flex-col items-center justify-center">
 				<div className="flex flex-col w-full max-w-sm gap-6">
 					<Link

@@ -9,7 +9,7 @@ export default async function LoginPage() {
 	});
 
 	if (session) {
-		return redirect("/dashboard");
+		return redirect("/courses");
 	}
 	return <LoginForm />;
 }

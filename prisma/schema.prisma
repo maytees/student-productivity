@@ -19,6 +19,10 @@ model User {
   emailVerified Boolean @default(false)
   image         String?
 
+  school String?
+  major  String?
+  year   String? // Freshman, Sophmore, etc
+
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @default(now()) @updatedAt
   sessions   Session[]
@@ -34,18 +38,14 @@ model Session {
   id        String   @id
   expiresAt DateTime
   token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Student info
-  school String?
-  major  String?
-  year   String? // Freshman, Sophmore, etc
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  courses Course[]
+  impersonatedBy String?
 
   @@unique([token])
   @@map("session")
@@ -104,8 +104,6 @@ model Course {
 
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-  Session    Session?     @relation(fields: [sessionId], references: [id])
-  sessionId  String?
   Assignment Assignment[]
 
   @@unique([userId, code]) // Prevent duplicate course codes per user

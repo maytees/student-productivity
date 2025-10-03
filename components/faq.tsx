@@ -1,79 +1,81 @@
-"use client";
-
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { useId } from "react";
+    DatabaseBackup,
+    FileSignature,
+    Import,
+    LockKeyhole,
+    MailCheck,
+    ShieldCheck,
+} from "lucide-react";
 
-export function FAQ() {
-  const faqs = [
+const faq = [
     {
-      question: "Will using a scheduling tool hurt my organic reach?",
-      answer:
-        "No. We use native posting methods that social platforms recognize as authentic. Many creators actually see better engagement because they can post consistently at optimal times when their audience is most active.",
+        icon: MailCheck,
+        question: "How do I sign up?",
+        answer:
+            "Use your email or GitHub to create an account. We’ll send a one‑time code to verify you—no passwords to remember.",
     },
     {
-      question: "How does the AI content creation work?",
-      answer:
-        "Our AI helps you generate captions, hashtags, and content ideas based on your niche and audience. You can also use it to adapt existing content for different platforms while maintaining your unique voice and brand.",
+        icon: Import,
+        question: "Can I import assignments?",
+        answer:
+            "You can quickly add assignments and link to external pages like Canvas or Google Docs. CSV import is coming soon.",
     },
     {
-      question: "Which social media platforms can I post to?",
-      answer:
-        "You can schedule posts to Instagram, Facebook, LinkedIn, Twitter/X, TikTok, YouTube Shorts, Threads, and Pinterest. The Free plan includes 3 platforms, while paid plans unlock all platforms.",
+        icon: DatabaseBackup,
+        question: "Will I lose my data?",
+        answer:
+            "Your data is stored securely in the cloud. You can export your courses and assignments anytime.",
     },
     {
-      question: "Can I connect multiple accounts per platform?",
-      answer:
-        "The Free plan allows 1 account per platform to get you started. Creator Pro and Agency plans allow you to connect multiple accounts per platform, perfect for managing personal and business accounts or multiple brands.",
+        icon: ShieldCheck,
+        question: "Is my information private?",
+        answer:
+            "Yes. We only collect what’s necessary to run Molnr. No ads, no selling data. You control your information.",
     },
     {
-      question: "Can I manage multiple client accounts as an agency?",
-      answer:
-        "Yes! The Agency plan is designed specifically for this. You get separate workspaces for each client, approval workflows, team collaboration tools, and the ability to publish across all client accounts simultaneously.",
+        icon: LockKeyhole,
+        question: "Do you support schools or teams?",
+        answer:
+            "We’re building shared courses and team spaces. Join the waitlist from Pricing to get early access.",
     },
     {
-      question: "What if I need help getting started?",
-      answer:
-        "We provide onboarding tutorials, content templates, and best practice guides. Creator Pro includes email support within 24 hours, while Agency users get priority support with 2-hour response times plus monthly strategy calls.",
+        icon: FileSignature,
+        question: "Is there a student discount?",
+        answer:
+            "Yes—Molnr is made for students. The Free plan covers essentials, and Pro is priced affordably for the semester.",
     },
-  ];
+];
 
-  return (
-    <section id={useId()} className="py-20 sm:py-24">
-      <div className="max-w-4xl px-6 mx-auto">
-        <div className="text-center">
-          <h2 className="text-3xl font-semibold tracking-tight text-foreground  font-lora">
-            Frequently asked questions
-          </h2>
-          <p className="mt-3 text-muted-foreground ">
-            Everything you need to know before you start.
-          </p>
+const FAQ = () => {
+    return (
+        <div
+            id="faq"
+            className="min-h-screen flex items-center justify-center px-6 py-12 xs:py-20"
+        >
+            <div className="max-w-screen-lg">
+                <h2 className="text-3xl xs:text-4xl md:text-5xl !leading-[1.15] font-bold tracking-tight text-center">
+                    Questions about Molnr
+                </h2>
+                <p className="mt-3 xs:text-lg text-center text-muted-foreground">
+                    Everything you need to know to get started and stay productive.
+                </p>
+
+                <div className="mt-12 grid md:grid-cols-2 bg-background rounded-xl overflow-hidden outline outline-[1px] outline-border outline-offset-[-1px]">
+                    {faq.map(({ question, answer, icon: Icon }) => (
+                        <div key={question} className="border p-6 -mt-px -ml-px">
+                            <div className="h-8 w-8 xs:h-10 xs:w-10 flex items-center justify-center rounded-full bg-accent">
+                                <Icon className="h-4 w-4 xs:h-6 xs:w-6" />
+                            </div>
+                            <div className="mt-3 mb-2 flex items-start gap-2 text-lg xs:text-[1.35rem] font-semibold tracking-tight">
+                                <span>{question}</span>
+                            </div>
+                            <p className="text-sm xs:text-base">{answer}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
+    );
+};
 
-        <div className="py-3 mt-10 ">
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                key={index}
-                value={`item-${index}`}
-                className="border border-border rounded-lg bg-card px-4 data-[state=open]:bg-card"
-              >
-                <AccordionTrigger className="py-4 text-sm text-foreground  hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="pb-4 text-sm text-muted-foreground ">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </div>
-    </section>
-  );
-}
+export default FAQ;

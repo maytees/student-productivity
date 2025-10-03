@@ -1,142 +1,162 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { CircleCheck, CircleHelp } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
-export function Pricing() {
-  const plans = [
+const tooltipContent = {
+    styles: "Choose from a variety of styles to suit your preferences.",
+    filters: "Choose from a variety of filters to enhance your portraits.",
+    credits: "Use these credits to retouch your portraits.",
+};
+
+const YEARLY_DISCOUNT = 20;
+type PlanFeature = { title: string; tooltip?: string };
+type Plan = {
+    name: string;
+    price: number;
+    description: string;
+    features: PlanFeature[];
+    buttonText: string;
+    isPopular?: boolean;
+    isRecommended?: boolean;
+};
+
+const plans: Plan[] = [
     {
-      name: "Free",
-      price: "$0",
-      period: "Forever",
-      badge: "Freemium",
-      features: [
-        "Post to 3 platforms (Twitter/X, Instagram, LinkedIn)",
-        "1 account per platform",
-        "10 AI-generated content templates",
-        "Basic drag and drop scheduler (1 day ahead)",
-        "1 posts per day limit",
-        "Community support only"
-      ],
-      buttonText: "Get started",
-      buttonVariant: "outline" as const,
-      href: "#",
+        name: "Free",
+        price: 0,
+        description:
+            "Plan assignments, track a few courses, and try study tools.",
+        features: [
+            { title: "Up to 3 courses" },
+            { title: "Assignments + Kanban + Table" },
+            { title: "Basic study tools (Pomodoro, Flashcards)" },
+            { title: "Email sign‑in" },
+        ],
+        buttonText: "Start Free",
     },
     {
-      name: "Creator Pro",
-      price: "$15",
-      period: "per month",
-      badge: "Most popular",
-      popular: true,
-      features: [
-        "Post to 8 platforms (Twitter/X, Instagram, LinkedIn, Facebook, TikTok, YouTube Shorts, Threads, Pinterest)",
-        "Up to 5 accounts per platform",
-        "Unlimited posts per day",
-        "Advanced drag and drop calendar (any day in advance)",
-        "AI content optimization for each platform",
-        "AI caption generator",
-        "Bulk upload and schedule (up to 50 posts at once)",
-        "Auto resize images and videos for each platform",
-        "Best time to post recommendations based on your audience",
-        "Performance analytics with engagement insights",
-        "Auto repost top performing content",
-        "Email support within 24 hours",
-      ],
-      buttonText: "Choose Pro",
-      buttonVariant: "primary" as const,
-      href: "#",
+        name: "Pro",
+        price: 6,
+        isRecommended: true,
+        description:
+            "Everything you need to stay organized all semester.",
+        features: [
+            { title: "Unlimited courses" },
+            { title: "Priority + labels + subtasks" },
+            { title: "Advanced study tools and stats" },
+            { title: "Email + GitHub sign‑in" },
+        ],
+        buttonText: "Upgrade to Pro",
+        isPopular: true,
     },
     {
-      name: "Agency",
-      price: "$30",
-      period: "+ $10 per client",
-      features: [
-        "Manage multiple clients with separate workspaces",
-        "Everything in Creator Pro",
-        "Unlimited platforms and client accounts",
-        "White-label dashboard with your branding",
-        "Client approval workflows with comment system",
-        "Team collaboration tools (assign posts to team members)",
-        "Bulk publishing across all client accounts simultaneously",
-        "Cross-platform content adaptation with brand voice consistency",
-        "Advanced analytics dashboard with client reporting",
-        "Custom content templates for each client's brand",
-        "Priority support (2-hour response time)",
-        "Monthly strategy calls with growth expert",
-        "API access for custom integrations"
-      ],
-      buttonText: "Choose Agency",
-      buttonVariant: "outline" as const,
-      href: "#contact",
+        name: "Teams (Soon)",
+        price: 0,
+        description:
+            "Collaboration for groups and clubs.",
+        features: [
+            { title: "Shared courses and assignments" },
+            { title: "Real‑time collaboration" },
+            { title: "Team insights" },
+        ],
+        buttonText: "Join Waitlist",
     },
-  ];
+];
 
-  return (
-    <section id={"pricing"} className="py-20 sm:py-24 bg-muted/30">
-      <div className="px-6 mx-auto max-w-7xl">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl text-foreground  font-lora">
-            Simple pricing for real work
-          </h2>
-          <p className="mt-3 text-muted-foreground ">
-            Low-cost monthly plans with a freemium tier for getting started. No enterprise pricing bullshit.
-          </p>
-        </div>
+const Pricing = () => {
+    const [selectedBillingPeriod, setSelectedBillingPeriod] = useState("monthly");
 
-        <div className="mt-10 grid md:grid-cols-3 gap-6">
-          {plans.map((plan) => (
-            <Card
-              key={plan.name}
-              className={`p-6 flex flex-col relative ${plan.popular ? "border-2 border-primary" : ""
-                }`}
+    return (
+        <div
+            id="pricing"
+            className="flex flex-col items-center justify-center py-12 xs:py-20 px-6"
+        >
+            <h1 className="text-3xl xs:text-4xl md:text-5xl font-bold text-center tracking-tight">
+                Simple pricing for students
+            </h1>
+            <Tabs
+                value={selectedBillingPeriod}
+                onValueChange={setSelectedBillingPeriod}
+                className="mt-8"
             >
-              {plan.badge && (
-                <span
-                  className={`absolute -top-3 right-3 text-[11px] px-2 py-1 rounded-md  ${plan.popular
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground"
-                    }`}
-                >
-                  {plan.badge}
-                </span>
-              )}
+                <TabsList className="h-11 px-1.5 rounded-full bg-primary/5">
+                    <TabsTrigger value="monthly" className="py-1.5 rounded-full">
+                        Monthly
+                    </TabsTrigger>
+                    <TabsTrigger value="yearly" className="py-1.5 rounded-full">
+                        Yearly (Save {YEARLY_DISCOUNT}%)
+                    </TabsTrigger>
+                </TabsList>
+            </Tabs>
+            <div className="mt-12 max-w-screen-lg mx-auto grid grid-cols-1 lg:grid-cols-3 items-center gap-8">
+                {plans.map((plan) => (
+                    <div
+                        key={plan.name}
+                        className={cn("relative border rounded-xl p-6 bg-background/50", {
+                            "border-[2px] border-primary bg-background py-10": plan.isPopular,
+                        })}
+                    >
+                        {plan.isPopular && (
+                            <Badge className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2">
+                                Most Popular
+                            </Badge>
+                        )}
+                        <h3 className="text-lg font-medium">{plan.name}</h3>
+                        <p className="mt-2 text-4xl font-bold">
+                            $
+                            {selectedBillingPeriod === "monthly"
+                                ? plan.price
+                                : plan.price * ((100 - YEARLY_DISCOUNT) / 100)}
+                            <span className="ml-1.5 text-sm text-muted-foreground font-normal">
+                                /month
+                            </span>
+                        </p>
+                        <p className="mt-4 font-medium text-muted-foreground">
+                            {plan.description}
+                        </p>
 
-              <h3 className="text-lg tracking-tight text-foreground font-lora">
-                {plan.name}
-              </h3>
-
-              <div className="mt-4">
-                <div className="text-3xl font-semibold tracking-tight text-foreground  font-lora">
-                  {plan.price}
-                </div>
-                <div className="text-sm text-muted-foreground ">
-                  {plan.period}
-                </div>
-              </div>
-
-              <ul className="flex-1 mt-6 text-sm space-y-3 text-muted-foreground">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="leading-relaxed">{feature}</span>
-                  </li>
+                        <Button
+                            variant={plan.isPopular ? "primary" : "outline"}
+                            size="lg"
+                            className="w-full mt-6 text-base"
+                            asChild
+                        >
+                            <Link href="/login">{plan.buttonText}</Link>
+                        </Button>
+                        <Separator className="my-8" />
+                        <ul className="space-y-2">
+                            {plan.features.map((feature) => (
+                                <li key={feature.title} className="flex items-start gap-1.5">
+                                    <CircleCheck className="h-4 w-4 mt-1 text-green-600" />
+                                    {feature.title}
+                                    {feature.tooltip && (
+                                        <Tooltip>
+                                            <TooltipTrigger className="cursor-help">
+                                                <CircleHelp className="h-4 w-4 mt-1 text-gray-500" />
+                                            </TooltipTrigger>
+                                            <TooltipContent>{feature.tooltip}</TooltipContent>
+                                        </Tooltip>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 ))}
-              </ul>
-
-              <Button asChild variant={plan.buttonVariant} className="mt-6 ">
-                <Link href={plan.href}>{plan.buttonText}</Link>
-              </Button>
-            </Card>
-          ))}
+            </div>
         </div>
+    );
+};
 
-        <p className="mt-6 text-xs text-center text-muted-foreground ">
-          Monthly plans are billed monthly. Cancel anytime. No credit card
-          required for Free. 7-day money-back guarantee on all paid plans.
-        </p>
-      </div>
-    </section>
-  );
-}
+export default Pricing;

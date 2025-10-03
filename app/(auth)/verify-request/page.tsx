@@ -45,7 +45,7 @@ function VerifyRequest() {
 				fetchOptions: {
 					onSuccess: () => {
 						toast.success("Email verified");
-						router.push("/dashboard");
+						router.push("/courses");
 					},
 					onError: (error: ErrorContext) => {
 						toast.error(error.error.message);
